@@ -1,0 +1,47 @@
+/* ---------------------------------make style for data in site -------------------------- */
+.dataShow{
+  color: var(--myWhite);
+  padding-bottom: 10rem;
+}
+.dataShow .rating{
+    background-color: var(--td2Color);
+    width: fit-content;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .5rem;
+  }
+.dataShow   .moveTitle{
+    padding-top: .5rem;
+    font-size: 1rem;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+.dataShow   .movieImage{
+    width: 100%;
+  }
+ .dataShow  .mainTitle{
+    padding-top: 1.5rem;
+    font-family: 'Tilt Prism', cursive;
+  }
+ .dataShow  .moviesInfo{
+    overflow: hidden;
+    margin-bottom: .5rem;
+    border-radius: var(--st1Radius);
+    -webkit-border-radius: var(--st1Radius);
+    -moz-border-radius: var(--st1Radius);
+    -ms-border-radius: var(--st1Radius);
+    -o-border-radius: var(--st1Radius);
+    background-color: var(--td2Color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  /* ---------------------------------end make style for data in site -------------------------- */

@@ -1,0 +1,17 @@
+.rigster .form{
+    color: white;
+}
+.rigster .mainTitle{
+    color: white;
+    padding-bottom: 2rem
+}
+.rigster .form .btn{
+    margin-left:auto;
+    width: fit-content;
+    display: block;
+    margin-top: 2rem;
+}
+.rigster{
+    padding: 4rem 10rem;
+    margin-bottom: 5rem;
+}

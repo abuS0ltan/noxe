@@ -1,0 +1,10 @@
+@media (max-width: 768px) { 
+.rigster{
+    padding: 4rem 5rem;
+}
+}
+@media (max-width: 576px){
+    .rigster{
+        padding: 4rem 2rem;
+    }
+}

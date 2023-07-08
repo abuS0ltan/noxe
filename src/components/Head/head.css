@@ -1,0 +1,28 @@
+/* ---------------------------------made header style------------------------------------------ */
+.header{
+    color: var(--myWhite);
+    padding: 3rem 0;
+    font-family: 'Source Code Pro', monospace;
+    background-image: url('./background.jpg');
+    background-size: cover;
+    border-bottom-right-radius: var(--st1Radius);
+    border-bottom-left-radius: var(--st1Radius);
+    margin-bottom: 2rem;
+  }
+  .header{
+    text-align: center;
+    color: var(--myWhite);
+  }
+  .header .mainTitle{
+    color: var(--myWhite);
+    font-family: 'Tilt Prism', cursive;
+    font-size: 5rem;
+    padding: 3rem 0;
+    
+  }
+  @media (max-width: 576px) { 
+    .header{
+      background-position: -20rem 0rem;
+    }
+  }
+  /* ---------------------------------end made header style------------------------------------------ */
