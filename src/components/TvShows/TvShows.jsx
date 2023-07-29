@@ -21,6 +21,7 @@ export default function TvShows() {
     let makeData=async ()=>{
       let dataToSent= tvShows.map((ele)=>{
         let info = {
+          id:ele.id,
           title:ele.original_name,
           image:ele.poster_path,
           rating:ele.vote_average.toFixed(1),
@@ -34,7 +35,7 @@ export default function TvShows() {
   return (
     <div className='tvShows'>
       <Head mainTitle={mainTitle}/>
-      <DataShow data={data}/>
+      <DataShow data={data} type={'tv'}/>
     </div>
   )
 }

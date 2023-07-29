@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import './navbar.css';
-export default function Navbar() {
-  useEffect(()=>{
+export default function Navbar({ userData,logout }) {
+  useEffect(() => {
     changeNavTogglertColor();
+    console.log(userData);
   });
-  let changeNavTogglertColor=()=>{
-    let navbarToggler=document.querySelector('.navbar-toggler');
-    navbarToggler.addEventListener('click',()=>{
-      navbarToggler.style.borderColor= "transparent";
+  let changeNavTogglertColor = () => {
+    let navbarToggler = document.querySelector('.navbar-toggler');
+    navbarToggler.addEventListener('click', () => {
+      navbarToggler.style.borderColor = "transparent";
 
     })
   }
@@ -39,15 +41,30 @@ export default function Navbar() {
               </li>
             </ul>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link to='logout' className='nav-link'>Logout</Link>
-              </li>
-              <li className="nav-item">
-                <Link to='login' className='nav-link'>Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link to='rigster' className='nav-link'>Rigester</Link>
-              </li>
+              {userData == undefined ?
+                <>
+
+                  <li className="nav-item">
+                    <Link to='login' className='nav-link'>Login</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to='rigster' className='nav-link'>Rigester</Link>
+                  </li>
+                </>
+                :
+                <>
+                  <li className="nav-item">
+                    <Link className='nav-link'>{userData.first_name}</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link onClick={logout} className='nav-link'>Logout</Link>
+                  </li>
+
+                </>
+                
+              }
+
+
             </ul>
           </div>
         </div>

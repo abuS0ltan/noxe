@@ -21,6 +21,7 @@ export default function People() {
       let makeData=async ()=>{
         let dataToSent= people.map((ele)=>{
           let info = {
+            id:ele.id,
             title:ele.original_name,
             image:ele.profile_path,
             rating:ele.popularity.toFixed(1),
@@ -34,7 +35,7 @@ export default function People() {
   return (
     <div className='people'>
       <Head mainTitle={mainTitle}/>
-      <DataShow data ={data}/>
+      <DataShow data ={data} type={'person'}/>
     </div>
   )
 }

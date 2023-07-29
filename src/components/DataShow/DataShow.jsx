@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import './dataShow.css';
-export default function DataShow(data) {
+import { useNavigate } from 'react-router-dom';
+export default function DataShow({data,type}) {
   let [prefixImage] = useState('https://image.tmdb.org/t/p/w500/');
   let [dataToShow,setDataToShow]=useState([]);
   let [test,setTest]=useState('test');
-  //=======================made Srarch================================
+  let navigate=useNavigate();
     useEffect(()=>{
-      setDataToShow(data.data);
+      setDataToShow(data);
+      console.log(data)
+      console.log(type)
     })
+  //=======================made Srarch================================
     let search=()=>{
       let searchInput=document.querySelector('.searchInput');
       let newData =[];
@@ -48,6 +52,16 @@ export default function DataShow(data) {
     };
   //=======================end made Srarch============================
 
+
+  //=======================made go to details================================
+  let goToDetails=(id)=>{
+    navigate({
+      pathname:'/details',
+      search:`?id=${id}&type=${type}`,
+    }
+    );
+  }
+  //=======================end made details================================
   return (
     <div className='dataShow'>
       <div className="container">
@@ -64,12 +78,18 @@ export default function DataShow(data) {
 
 
         <div className="row">
+          
           {
+            
             dataToShow.map((ele, index) => {
               return (
-                <div className="col-lg-2 col-md-3 col-sm-6 mb-3" key={index}>
+                <div className="col-lg-2 col-md-3 col-sm-6 mb-3 ele" key={index} >
+                  
                   <div className="moviesInfo">
-                    <img src={prefixImage + ele.image} alt="" className='movieImage' />
+                    <div className="overlay">
+                      <button className='btn' onClick={()=>goToDetails(ele.id)}>Go to details</button>
+                    </div>
+                    <img src={prefixImage + ele.image} alt={ele.title} className='movieImage' />
                     <div className="titleDiv">
                       <h3 className="moveTitle">{ele.title}</h3>
                     </div>

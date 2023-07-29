@@ -21,6 +21,7 @@ export default function Movies() {
   let makeData=async ()=>{
       let dataToSent= movies.map((ele)=>{
         let info = {
+          id:ele.id,
           title:ele.title,
           image:ele.poster_path,
           rating:ele.vote_average.toFixed(1),
@@ -34,7 +35,7 @@ export default function Movies() {
   return (
     <div className='movies'>
       <Head mainTitle={mainTitle}/>
-      <DataShow data={data}/>
+      <DataShow data={data} type={'movie'}/>
     </div>
   )
 }
