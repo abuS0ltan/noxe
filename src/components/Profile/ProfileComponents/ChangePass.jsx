@@ -13,6 +13,7 @@ export default function ChangePass({userData,setLoginData,logout}) {
     age: '',
     email: '',
     password: '',
+    list:[],
   }
   );
   useEffect(()=>{

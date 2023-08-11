@@ -12,6 +12,7 @@ export default function EditProfile({userData,setLoginData}) {
     age: '',
     email: '',
     password: '',
+    list:[],
   }
   );
   useEffect(()=>{
@@ -98,6 +99,7 @@ export default function EditProfile({userData,setLoginData}) {
       last_name: Joi.string().required().alphanum().min(2).max(20),
       age: Joi.number().min(12).max(150).required(),
       email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+      list:Joi.required(),
       password: Joi.string().required()
     })
     return schema.validate(data,{abortEarly:false});

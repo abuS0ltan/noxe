@@ -46,3 +46,9 @@
     color: var(--td2Color);
     font-size: 1.1rem;
 }
+.details .saveBtn{
+    background-color: transparent;
+    border-width: 0;
+    color: var(--td2Color);
+    font-size: 2rem;
+}

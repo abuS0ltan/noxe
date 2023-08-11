@@ -1,11 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Loding from '../Loding/Loding';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './details.css';
+
 export default function Details() {
-  let [prefixImage] = useState('https://image.tmdb.org/t/p/w500/');
+  let [prefixImage,setPrefix] = useState('https://image.tmdb.org/t/p/w500/');
   let [lodindScrren,setLodingScrren]=useState(true);
+  let [currentUser,setCurrentUser]=useState();
+  let [users,setUsers]=useState([]);
+  let [isSave,setIsSave]=useState(false);
+  let navigate=useNavigate();
   //======================get data from url====================================
   let [searchParams, setSearchParams] = useSearchParams();
   let type = searchParams.get('type');
@@ -68,8 +74,85 @@ export default function Details() {
     setEleData(info);
   }
   //=====================end make Data=================================
+  //======================make save====================================
+  let save=()=>{
+    if(localStorage.getItem("loginData")){
+      currentUser=JSON.parse(localStorage.getItem("loginData"));
+      users=JSON.parse(localStorage.getItem("users"));
+      console.log('save');
+      console.log(currentUser);
+      let item={
+        id:id,
+        type:type
+      }
+      console.log(item);
+      currentUser.list.push(item);
+      console.log(currentUser);
+      console.log(users);
+      let sameEmail;
+      let index = 0;
+      for ( ;index < users.length; index++) {
+        console.log(users)
+        if(currentUser.email==users[index].email){
+          sameEmail= index;
+        }
+      }
+      users[sameEmail]=currentUser;
+      localStorage.setItem('users',JSON.stringify(users));
+      localStorage.setItem("loginData",JSON.stringify(currentUser));
+      setIsSave(true);
+    }
+    else{
+      navigate('/login')
+    }
+  }
+  //==============================remove=======================================
+  const remove=()=>{
+    currentUser=JSON.parse(localStorage.getItem("loginData"));
+    users=JSON.parse(localStorage.getItem("users"));
+    let list=[...currentUser.list];
+      console.log(list);
+      let item;
+      list.forEach((ele,index)=>{
+        if(ele.id==id&&ele.type==type){
+          item=index;
+        }
+      })
+      console.log(item);
+      list.splice(item,1);
+      console.log(list);
+      currentUser.list=[...list];
+      console.log(currentUser);
+      let sameEmail;
+      let index = 0;
+      for ( ;index < users.length; index++) {
+        console.log(users)
+        if(currentUser.email==users[index].email){
+          sameEmail= index;
+        }
+      }
+      users[sameEmail]=currentUser;
+      localStorage.setItem('users',JSON.stringify(users));
+      localStorage.setItem("loginData",JSON.stringify(currentUser));
+      setIsSave(false);
+  }
   useEffect(() => {
     getData();
+    if(localStorage.getItem("loginData")){
+      currentUser=JSON.parse(localStorage.getItem("loginData"));
+      users=JSON.parse(localStorage.getItem("users"));
+      let list=[...currentUser.list];
+      console.log(list);
+      let itemExist=false;
+      list.forEach((ele)=>{
+        if(ele.id==id&&ele.type==type){
+          itemExist=true;
+        }
+        if(itemExist){
+          setIsSave(true);
+        }
+      })
+    }
   }, []);
   return (
     <div className='details'>
@@ -97,8 +180,8 @@ export default function Details() {
                 {eleData.tagline}
               </h2>
               {
-                eleData.genres.map((ele, index) => {
-
+                eleData.genres.map((ele,index) => {
+                  console.log(index);
                   return (type == 'person' ?
                     <>
                       <span className='genre' key={index}>{ele}</span>
@@ -126,14 +209,22 @@ export default function Details() {
               }
 
               <p className='popularity'>Popularity: {eleData.popularity}</p>
-
+              {isSave?
+                <>
+                  <button className='saveBtn' onClick={()=>remove()}><FontAwesomeIcon icon="fa-solid fa-bookmark" /></button>                
+                </>
+                :
+                <>
+                  <button className='saveBtn' onClick={()=>save()}><FontAwesomeIcon icon="fa-regular fa-bookmark" /></button>
+                </>
+              }
               <p className="overview">
                 {
                   eleData.overview
                 }
               </p>
 
-              <a href={eleData.homepage} target='blank' className='homepage'><i class="fa-solid fa-link"></i> Visit Homepage</a>
+              <a href={eleData.homepage} target='blank' className='homepage'><FontAwesomeIcon icon="fa-solid fa-link" /> Visit Homepage</a>
             </div>
           </div>
         </div>

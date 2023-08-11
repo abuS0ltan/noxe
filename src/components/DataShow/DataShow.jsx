@@ -67,6 +67,15 @@ export default function DataShow({data,type}) {
     
     <div className='dataShow'>
       <div className="container">
+        {
+          data.length==0?
+          <>
+            <p className='noData'>Sorry, there is no data to display:(</p>
+          </>
+          :
+          <>
+          </>
+        }
         {/* <div className="row justify-content-center my-5">
           <div className="col-md-10 col-xl-8">
           <div className="input-group ">

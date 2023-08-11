@@ -17,6 +17,7 @@ import Profile from './components/Profile/Profile';
 import EditProfile from './components/Profile/ProfileComponents/EditProfile';
 import ChangePass from './components/Profile/ProfileComponents/ChangePass';
 import Loding from './components/Loding/Loding';
+import YourList from './components/YourList/YourList';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       age: '20',
       email: 'admin@admin.com',
       password: 'admin',
+      list:[]
     }]
   if(localStorage.getItem("users")==null){
     localStorage.setItem('users',JSON.stringify(users));
@@ -90,6 +92,11 @@ function App() {
           <Route path='tvshows' element={
             <ProtectedRoutes userData={userData}>
               <TvShows/>
+            </ProtectedRoutes>
+          }/>
+          <Route path='yourlist' element={
+            <ProtectedRoutes userData={userData}>
+              <YourList/>
             </ProtectedRoutes>
           }/>
           <Route path='profile' element={

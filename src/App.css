@@ -1,6 +1,7 @@
 .App {
   min-height: 90vh;
   position: relative;
+  overflow: hidden;
 }
 
 .App-logo {

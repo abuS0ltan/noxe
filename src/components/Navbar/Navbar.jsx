@@ -60,6 +60,9 @@ export default function Navbar({ userData, logout }) {
                       <li className="nav-item">
                         <Link className='nav-link' to='/profile'>Profile</Link>
                       </li>
+                      <li className="nav-item">
+                        <Link className='nav-link' to='/yourlist'>YourList</Link>
+                      </li>
                       <li className="nav-item lastItem">
                         <Link onClick={logout} className='nav-link'>Logout</Link>
                       </li>

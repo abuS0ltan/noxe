@@ -11,6 +11,7 @@ export default function Rigster() {
     age: '',
     email: '',
     password: '',
+    list:[],
   }
   );
   let [loading,setLoading]=useState(false);
@@ -80,6 +81,7 @@ export default function Rigster() {
       last_name: Joi.string().required().alphanum().min(2).max(20),
       age: Joi.number().min(12).max(150).required(),
       email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+      list:Joi.required(),
       password: Joi.string().required(),
     });
     return schema.validate(user,{abortEarly:false});
