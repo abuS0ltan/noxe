@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import Loding from '../Loding/Loding';
 import './home.css';
 import './homeMq.css'
 import WeekTrend from './HomeComponents/WeekTrend/WeekTrend';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 export default function Home() {
+  let [lodindScrren,setLodingScrren]=useState(true);
   let [trendMoviesDay, setTrendMoviesDay] = useState([]);
   let [trendTv, setTrendTv] = useState([]);
   let navigate=useNavigate();
@@ -14,7 +16,9 @@ export default function Home() {
   }, []);
   let [prefixImage] = useState('https://image.tmdb.org/t/p/w500/');
   let getTreand = async (url, collback) => {
+    setLodingScrren(true);
     let { data } = await axios.get(url);
+    setLodingScrren(false);
     collback(data.results);
     console.log(data.results);
   }
@@ -29,6 +33,14 @@ export default function Home() {
     //=======================end made details================================
   return (
     <div className='home'>
+      {
+        lodindScrren?
+        <>
+          <Loding/>
+        </>
+        :
+        <></>
+      }
       <header className='header'>
         <div className="container">
           <p className="wlecome">Welcome.</p>

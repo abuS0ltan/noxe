@@ -1,0 +1,57 @@
+.profile{
+    color: var(--myWhite);
+    font-family: 'Lumanosimo', cursive;
+    text-align: center;
+    overflow: auto;
+    height: 100%;
+}
+.profile .mainTitle{
+    font-family: 'Source Code Pro', monospace;
+    text-transform: uppercase;
+    margin: 2rem 0;
+}
+.profile .imgDiv img{
+    width: 50%;
+}
+.profile .info{
+    text-align: start;
+}
+.profile .infoItem{
+    display: block;
+    margin: 1rem 0;
+
+}
+.profile .info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.profile .btnDiv{
+    margin: 2rem 0rem;
+}
+.profile .btnDiv .edit{
+    background-color: var(--td2Color);
+    color: var(--myWhite);
+    margin-right: 1rem;
+    display: inline-block;
+}
+.profile .btnDiv .pass{
+    background-color: var(--myWhite);
+    color: var(--td2Color);
+    display: inline-block;
+    margin-left: 1rem;
+}
+.profile .btnDiv .edit:hover{
+    background-color: var(--myWhite);
+    color: var(--td2Color);
+}
+.profile .btnDiv .pass:hover{
+    background-color: var(--td2Color);
+    color: var(--myWhite);
+}
+/* ===========================edit and change================================= */
+.profile .modal{
+    display: block;
+    color: black;
+}

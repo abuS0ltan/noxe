@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './dataShow.css';
 import { useNavigate } from 'react-router-dom';
+import Loding from '../Loding/Loding';
 export default function DataShow({data,type}) {
   let [prefixImage] = useState('https://image.tmdb.org/t/p/w500/');
   let [dataToShow,setDataToShow]=useState([]);
@@ -63,6 +64,7 @@ export default function DataShow({data,type}) {
   }
   //=======================end made details================================
   return (
+    
     <div className='dataShow'>
       <div className="container">
         {/* <div className="row justify-content-center my-5">

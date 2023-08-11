@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Head from '../Head/Head';
 import DataShow from '../DataShow/DataShow';
+import Loding from '../Loding/Loding';
 export default function People() {
   let [data, setdata] = useState([]);
+  let [lodindScrren,setLodingScrren]=useState(true);
   let [mainTitle,setMainTilte]=useState('People');
   let [people, setPeople] = useState([]);
   let getData=async (url,collback)=>{
     let { data }=await axios.get(url);
+    setLodingScrren(false);
     collback(data.results);
     console.log(data.results);
   };
@@ -34,6 +37,14 @@ export default function People() {
     // ==================================end make array of data to send to data Show===========================================
   return (
     <div className='people'>
+      {
+        lodindScrren?
+        <>
+          <Loding/>
+        </>
+        :
+        <></>
+      }
       <Head mainTitle={mainTitle}/>
       <DataShow data ={data} type={'person'}/>
     </div>

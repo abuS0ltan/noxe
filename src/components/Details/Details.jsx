@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
+import Loding from '../Loding/Loding';
 import './details.css';
 export default function Details() {
   let [prefixImage] = useState('https://image.tmdb.org/t/p/w500/');
+  let [lodindScrren,setLodingScrren]=useState(true);
   //======================get data from url====================================
   let [searchParams, setSearchParams] = useSearchParams();
   let type = searchParams.get('type');
@@ -14,6 +16,7 @@ export default function Details() {
   let [eleData, setEleData] = useState({ genres: [] });
   let getData = async () => {
     let { data } = await axios.get(`https://api.themoviedb.org/3/${type}/${id}?api_key=085e63afd0a9d4557f1d96bbe7101ffa`)
+    setLodingScrren(false);
     console.log(data)
     makeData(data);
   }
@@ -70,6 +73,14 @@ export default function Details() {
   }, []);
   return (
     <div className='details'>
+      {
+        lodindScrren?
+        <>
+          <Loding/>
+        </>
+        :
+        <></>
+      }
       <div className="container">
         <div className="row">
           <div className="col-md-4">

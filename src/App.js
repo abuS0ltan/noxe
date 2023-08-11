@@ -13,6 +13,10 @@ import Footer from './components/Footer/Footer';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import { useEffect, useState } from 'react';
 import Details from './components/Details/Details';
+import Profile from './components/Profile/Profile';
+import EditProfile from './components/Profile/ProfileComponents/EditProfile';
+import ChangePass from './components/Profile/ProfileComponents/ChangePass';
+import Loding from './components/Loding/Loding';
 
 
 function App() {
@@ -50,7 +54,7 @@ function App() {
       // }
       }
     },[userData])
-  let setLoginData=()=>{
+  let setLoginData= ()=>{
     console.log(JSON.parse(localStorage.getItem("loginData")));
 
     if(userData==undefined){
@@ -66,9 +70,10 @@ function App() {
     return(<Navigate to='/login'/>)
   }
   return (
-    <div className="positionRelative">
+    <div className="positionRelative App">
         <Navbar userData={userData} logout={logout}/>
         <Routes>
+          {/* <Route path='editprofile' element={<EditProfile/>}/> */}
           <Route path='home' element={<Home/>}/>
           <Route path='/' element={<Home/>}/>
           <Route path='login' element={<Login setLoginData={setLoginData}/>}/>
@@ -87,11 +92,25 @@ function App() {
               <TvShows/>
             </ProtectedRoutes>
           }/>
+          <Route path='profile' element={
+            <ProtectedRoutes userData={userData}>
+              {/* <Profile userData={userData} setLoginData={setLoginData}/> */}
+              <Profile userData={userData} setLoginData={setLoginData}/>
+              
+            </ProtectedRoutes>}
+            >
+                <Route path='editprofile' element={<EditProfile userData={userData} setLoginData={setLoginData}/>} />
+                <Route path='changepass' element={<ChangePass userData={userData} setLoginData={setLoginData} logout={logout}/>}/>
+            </Route>
+            {/* <Route path='profile' element={<Profile userData={userData} setLoginData={setLoginData}/>}>
+              <Route path='editprofile' element={<EditProfile/>}/>
+              <Route path='changepass' element={<ChangePass/>}/>
+
+            </Route> */}
           <Route path='details' element={<Details/>}/>
           <Route path='rigster' element={<Rigster/>}/>
-          <Route path='weektrend' element={<WeekTrend/>} />
+          <Route path='loding' element={<Loding/>}/>
         </Routes>
-        <Footer/>
     </div>
   );
 }

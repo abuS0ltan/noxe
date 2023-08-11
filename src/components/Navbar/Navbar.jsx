@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './navbar.css';
-export default function Navbar({ userData,logout }) {
+import './navbarMq.css'
+export default function Navbar({ userData, logout }) {
   useEffect(() => {
     changeNavTogglertColor();
     console.log(userData);
@@ -14,14 +16,65 @@ export default function Navbar({ userData,logout }) {
 
     })
   }
+  let apper=false;
+  let drowpDownApper =()=>{
+    let drowpDown=document.querySelector('.drowpDown');
+    if(apper==false){
+      apper=true;
+      drowpDown.style.display='block';
+      window.removeEventListener('click',()=>{
+        console.log('remove')
+      })
+    }
+    else{
+      apper=false;
+      drowpDown.style.display='none';
+    }
+  }
+  window.addEventListener('click',(e)=>{
+    let drowpDownBtn=document.querySelector('.name');
+    if(e.target!=drowpDownBtn){
+      if(userData!=undefined)
+      if(apper==true){
+        apper =false;
+        let drowpDown=document.querySelector('.drowpDown');
+        if(drowpDown!=null)
+          drowpDown.style.display='none';
+      }
+    }
+    
+  })
   return (
     <div>
       <nav className="navbar navbar-expand-lg ">
         <div className="container-fluid">
           <Link className="navbar-brand" to='home'>Noxe</Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon" />
-          </button>
+
+          <div className='btnDiv'>
+            {
+              userData != undefined ?
+                <>
+                  <li className="nav-item d-flex">
+                    <span onClick={()=>drowpDownApper()} className='nav-link px-xl-4 px-md-3 px-2 name'> {userData.first_name}<FontAwesomeIcon className='icon' icon="fa-regular fa-user" /></span>
+                    <ul className="drowpDown">
+                      <li className="nav-item">
+                        <Link className='nav-link' to='/profile'>Profile</Link>
+                      </li>
+                      <li className="nav-item lastItem">
+                        <Link onClick={logout} className='nav-link'>Logout</Link>
+                      </li>
+                    </ul>
+                  </li>
+                </>
+                :
+                <></>
+            }
+
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon" />
+            </button>
+          </div>
+
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -53,20 +106,18 @@ export default function Navbar({ userData,logout }) {
                 </>
                 :
                 <>
-                  <li className="nav-item">
-                    <Link className='nav-link'>{userData.first_name}</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link onClick={logout} className='nav-link'>Logout</Link>
-                  </li>
 
                 </>
-                
+
               }
 
 
             </ul>
+
           </div>
+
+
+
         </div>
       </nav>
 

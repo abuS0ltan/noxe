@@ -3,6 +3,7 @@
   color: var(--myWhite);
   padding-bottom: 10rem;
   min-height: 100vh;
+  /* position: relative; */
 }
 .dataShow .rating{
     background-color: var(--td2Color);

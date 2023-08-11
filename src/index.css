@@ -16,6 +16,7 @@ font-family: 'Lumanosimo', cursive;
   --st1Radius:1.5rem;
   --td2Color:rgb(36,186,239);
   --myWhite:#FFF;
+  --backColor:#131722;
 }
 body {
   margin: 0;

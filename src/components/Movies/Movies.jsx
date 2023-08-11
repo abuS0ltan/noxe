@@ -3,12 +3,15 @@ import './movies.css'
 import axios from 'axios';
 import Head from '../Head/Head';
 import DataShow from '../DataShow/DataShow';
+import Loding from '../Loding/Loding';
 export default function Movies() {
+  let [lodindScrren,setLodingScrren]=useState(true);
   let [data, setdata] = useState([]);
   let [movies,setMovies]=useState([]);
   let [mainTitle,setMainTilte]=useState('Movies');
   let getTreand = async (url,collback) => {
     let { data } = await axios.get(url);
+    setLodingScrren(false);
     collback(data.results);
   }
     useEffect(() => {
@@ -17,6 +20,8 @@ export default function Movies() {
   useEffect(()=>{
     makeData();
   },[movies])
+  //===================================stop loding screen========================
+  
   // ==================================make array of data to send to data Show===========================================
   let makeData=async ()=>{
       let dataToSent= movies.map((ele)=>{
@@ -34,6 +39,14 @@ export default function Movies() {
 
   return (
     <div className='movies'>
+      {
+        lodindScrren?
+        <>
+          <Loding/>
+        </>
+        :
+        <></>
+      }
       <Head mainTitle={mainTitle}/>
       <DataShow data={data} type={'movie'}/>
     </div>

@@ -1,8 +1,8 @@
 .details{
-    margin: 5rem 0;
+    padding: 5rem 0;
     color: var(--myWhite);
     font-family: 'Lumanosimo', cursive;
-
+    padding-bottom: 10rem;
 }
 .details .poster img{
     width: 100%;
