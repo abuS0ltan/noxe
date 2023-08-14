@@ -95,7 +95,7 @@ export default function Navbar({ userData, logout }) {
                 <Link to='people' className='nav-link'>People</Link>
               </li>
             </ul>
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 myBorder">
               {userData == undefined ?
                 <>
 

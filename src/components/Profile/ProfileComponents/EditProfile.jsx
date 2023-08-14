@@ -80,8 +80,8 @@ export default function EditProfile({userData,setLoginData}) {
   //============================validate form==============================================
   const validateForm=()=>{
     const schema=Joi.object({
-      first_name: Joi.string().required().alphanum().min(2).max(20),
-      last_name: Joi.string().required().alphanum().min(2).max(20),
+      first_name: Joi.string().required().min(2).max(20),
+      last_name: Joi.string().required().min(2).max(20),
       age: Joi.number().min(12).max(150).required(),
       email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
       list:Joi.required(),

@@ -73,8 +73,8 @@ export default function Rigster() {
     const stringPassswordError = new Error("Password must be strong. At least one upper case alphabet. At least one lower case alphabet. At least one digit. At least one special character. Minimum eight in length")
     const schema = Joi.object({
       
-      first_name: Joi.string().required().alphanum().min(2).max(20),
-      last_name: Joi.string().required().alphanum().min(2).max(20),
+      first_name: Joi.string().required().min(2).max(20),
+      last_name: Joi.string().required().min(2).max(20),
       age: Joi.number().min(12).max(150).required(),
       email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
       list:Joi.required(),

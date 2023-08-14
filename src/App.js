@@ -26,7 +26,7 @@ function App() {
       first_name: 'admin',
       last_name: 'admin',
       age: '20',
-      email: 'admin@admin.com',
+      email: 'admin@gmail.com',
       password: 'admin',
       list:[]
     }]
@@ -110,7 +110,12 @@ function App() {
               <Route path='changepass' element={<ChangePass/>}/>
 
             </Route> */}
-          <Route path='details' element={<Details/>}/>
+          <Route path='details' element={
+            <ProtectedRoutes userData={userData}>
+              <Details/>
+            </ProtectedRoutes>
+          }/>
+          {/* <Route path='details' element={<Details/>}/> */}
           <Route path='rigster' element={<Rigster/>}/>
           <Route path='loding' element={<Loding/>}/>
         </Routes>

@@ -2,4 +2,9 @@
     .navbar .btnDiv{
         order: 0;
     }
+    .navbar .myBorder{
+       border-width: 0;
+       border-top: 1px solid var(--st1Color);
+   }
+    
  }
