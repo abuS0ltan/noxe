@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Joi from 'joi';
 import './login.css';
 import './loginMq.css';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 export default function Login({setLoginData}) {
   let users=[];
   let navigate=useNavigate();
@@ -30,7 +30,6 @@ export default function Login({setLoginData}) {
   }
   let runValidate=async ()=>{
     let validateResult = validateForm();
-    console.log(validateResult.error)
     if(validateResult.error!=undefined)
     {
       let registerBtn =document.querySelector('.registerBtn ');
@@ -53,12 +52,11 @@ export default function Login({setLoginData}) {
           return ele;
         }
       })
-      console.log(sameEmail);
       if(sameEmail==undefined){
         setErrorList([{message:'email not exist'}])
         setLoading(false);
         registerBtn.classList.remove('disabled');
-        registerBtn.innerHTML=`<span className='d-flex'>register</span>`;
+        registerBtn.innerHTML=`<span className='d-flex'>Login</span>`;
       }
       else{
         if(sameEmail.password!=user.password){
@@ -84,13 +82,13 @@ export default function Login({setLoginData}) {
   }
   useEffect(()=>{
     users=JSON.parse(localStorage.getItem("users"));
-    console.log(users);
+    document.title=`Noxe: Login`;
   });
   return (
     // i give class rigster becouse the same style and dont have tiem to eidit it :(
-    <div className='rigster Login'>
+    <div className='rigster login'>
       <div className="container">
-        <h1 className='mainTitle'>Login Form</h1>
+        <h1 className='mainTitle'>Sing In</h1>
         {
                       errorList.map((ele,index)=>{
                         return(
@@ -109,6 +107,7 @@ export default function Login({setLoginData}) {
             <label htmlFor="exampleFormControlInput1" className="form-label">Password</label>
             <input type="password" className="form-control" id="exampleFormControlInput1" onChange={changeFormValue} name='password' />
           </div>
+          <p className='signUp'>Do not have an account, <Link to='/rigster' className='link'> Sign up</Link> </p>
           <button type='submit' className='btn btn-primary registerBtn'>
            <span className='d-flex'>Login</span>
           </button>

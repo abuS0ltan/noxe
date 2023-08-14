@@ -3,14 +3,11 @@ import './dataShow.css';
 import { useNavigate } from 'react-router-dom';
 import Loding from '../Loding/Loding';
 export default function DataShow({data,type}) {
-  let [prefixImage] = useState('https://image.tmdb.org/t/p/w500/');
   let [dataToShow,setDataToShow]=useState([]);
   let [test,setTest]=useState('test');
   let navigate=useNavigate();
     useEffect(()=>{
       setDataToShow(data);
-      console.log(data)
-      console.log(type)
     })
   //=======================made Srarch================================
     let search=()=>{
@@ -39,17 +36,12 @@ export default function DataShow({data,type}) {
       //   // }
       //   // console.log(dataToShow);
       // })
-      console.log(searchInput.value)
         newData = dataToShow.filter ((ele)=>{
           if(ele.title.toLowerCase().includes(searchInput.value.toLowerCase()))
             return ele;
         })
-        console.log(newData);
         setDataToShow(newData);
-        console.log(dataToShow);
-        console.log(test)
         setTest('test2');
-        console.log(test)
     };
   //=======================end made Srarch============================
 
@@ -94,13 +86,13 @@ export default function DataShow({data,type}) {
             
             dataToShow.map((ele, index) => {
               return (
-                <div className="col-lg-2 col-md-3 col-sm-6 mb-3 ele" key={index} >
+                <div className="col-lg-2 col-md-3 col-6 mb-3 ele" key={index} >
                   
                   <div className="moviesInfo">
                     <div className="overlay">
                       <button className='btn' onClick={()=>goToDetails(ele.id)}>Go to details</button>
                     </div>
-                    <img src={prefixImage + ele.image} alt={ele.title} className='movieImage' />
+                    <img src={ele.image} alt={ele.title} className='movieImage' />
                     <div className="titleDiv">
                       <h3 className="moveTitle">{ele.title}</h3>
                     </div>

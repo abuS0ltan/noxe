@@ -9,14 +9,15 @@ export default function People() {
   let [lodindScrren,setLodingScrren]=useState(true);
   let [mainTitle,setMainTilte]=useState('People');
   let [people, setPeople] = useState([]);
+  let [prefixImage] = useState('https://image.tmdb.org/t/p/w500/');
   let getData=async (url,collback)=>{
     setLodingScrren(true);
     let { data }=await axios.get(url);
     setLodingScrren(false);
     collback(data.results);
-    console.log(data.results);
   };
   useEffect(()=>{
+    document.title=`Noxe: People`;
     getData('https://api.themoviedb.org/3/trending/person/day?api_key=085e63afd0a9d4557f1d96bbe7101ffa',setPeople);
   },[]);
   useEffect(()=>{
@@ -28,19 +29,17 @@ export default function People() {
           let info = {
             id:ele.id,
             title:ele.original_name,
-            image:ele.profile_path,
+            image:ele.profile_path!=null ?prefixImage+ele.profile_path:'/peopleDefultImg.jpg',
             rating:ele.popularity.toFixed(1),
           }
           return info;
         });
-        console.log(dataToSent);
         setdata(dataToSent);
     }
     // ==================================end make array of data to send to data Show===========================================
     //===================================search==========================================
     let search=()=>{
       let searchInput=document.querySelector('.searchInput');
-      console.log(searchInput.value);
       let name=searchInput.value;
       getData(`https://api.themoviedb.org/3/search/person?query=${name}&api_key=085e63afd0a9d4557f1d96bbe7101ffa`,setPeople);
     };

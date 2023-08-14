@@ -9,6 +9,7 @@ export default function Movies() {
   let [data, setdata] = useState([]);
   let [movies, setMovies] = useState([]);
   let [mainTitle, setMainTilte] = useState('Movies');
+  let [prefixImage] = useState('https://image.tmdb.org/t/p/w500/');
   let getTreand = async (url, collback) => {
     setLodingScrren(true);
     let { data } = await axios.get(url);
@@ -16,6 +17,7 @@ export default function Movies() {
     collback(data.results);
   }
   useEffect(() => {
+    document.title=`Noxe: Movies`;
     getTreand(`https://api.themoviedb.org/3/discover/movie?api_key=085e63afd0a9d4557f1d96bbe7101ffa`, setMovies);
   }, []);
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function Movies() {
       let info = {
         id: ele.id,
         title: ele.title,
-        image: ele.poster_path,
+        image: ele.poster_path!=null ? prefixImage+ele.poster_path:'/default-image.jpg',
         rating: ele.vote_average.toFixed(1),
       }
       return info;
@@ -40,7 +42,6 @@ export default function Movies() {
   //===================================search==========================================
   let search = () => {
     let searchInput = document.querySelector('.searchInput');
-    console.log(searchInput.value);
     let name = searchInput.value;
     getTreand(`https://api.themoviedb.org/3/search/movie?query=${name}&api_key=085e63afd0a9d4557f1d96bbe7101ffa`, setMovies);
   };
@@ -64,7 +65,7 @@ export default function Movies() {
       <div className="row justify-content-center my-5">
         <div className="col-md-10 col-xl-8">
           <div className="searchDiv container">
-            <div className="input-group ">
+            <div className="input-group">
               <span className="input-group-text" id="inputGroup-sizing-default">Search</span>
               <input type="text" className="form-control searchInput" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
               <button className='input-group-text btn searchBtn' onClick={() => search()}>search</button>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Joi from 'joi';
 import './rigster.css';
 import './rigsterMq.css';
+import { Link } from 'react-router-dom';
 import { Navigate, useNavigate } from 'react-router-dom';
 export default function Rigster() {
   let navigate=useNavigate();
@@ -34,55 +35,52 @@ export default function Rigster() {
   }
   let runValidate=async ()=>{
     let validateResult = validateForm();
-    console.log(validateResult.error)
     if(validateResult.error!=undefined)
     {
       let registerBtn =document.querySelector('.registerBtn ');
       setErrorList(validateResult.error.details);
-      console.log(validateResult.error.details);
       //the correct code is this but i make it comment b i need to test the loading in rigster btn
       // setLoading(false);
       // registerBtn.classList.remove('disabled');
       setTimeout(() => { 
           setLoading(false);
           registerBtn.classList.remove('disabled');
-          registerBtn.innerHTML=`<span className='d-flex'>register</span>`;
+          registerBtn.innerHTML=`<span className='d-flex'>Register</span>`;
        }, 2000);
     }
     else{
       let sameEmail=users.filter((ele)=>{
         if(user.email==ele.email){
-          console.log('hi555');
           return ele;
         }
       })
-      console.log(sameEmail);
       if(sameEmail.length!=0){
-        console.log(sameEmail);
-        console.log(55)
         let registerBtn =document.querySelector('.registerBtn ');
         setErrorList([{message:'email is already exist'}])
         setLoading(false);
         registerBtn.classList.remove('disabled');
-        registerBtn.innerHTML=`<span className='d-flex'>register</span>`;
+        registerBtn.innerHTML=`<span className='d-flex'>Register</span>`;
       }
       else{
         users.push(user);
-        console.log(users)
         localStorage.setItem("users",JSON.stringify(users));
-        console.log(JSON.parse(localStorage.getItem("users")))
         navigate('/login');
       }
     }
   };
   let validateForm = () => {
+    const strongPasswordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    const stringPassswordError = new Error("Password must be strong. At least one upper case alphabet. At least one lower case alphabet. At least one digit. At least one special character. Minimum eight in length")
     const schema = Joi.object({
+      
       first_name: Joi.string().required().alphanum().min(2).max(20),
       last_name: Joi.string().required().alphanum().min(2).max(20),
       age: Joi.number().min(12).max(150).required(),
       email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
       list:Joi.required(),
-      password: Joi.string().required(),
+      password: Joi.string()
+      .min(8)
+      .max(20)
     });
     return schema.validate(user,{abortEarly:false});
   }
@@ -115,14 +113,13 @@ export default function Rigster() {
     //   alert.style.display='block';
     // }
     users=JSON.parse(localStorage.getItem("users"));
-    console.log(users);
-    console.log('hi')
+    document.title=`Noxe: Rigster`;
   });
 
   return (
     <div className='rigster'>
       <div className="container">
-        <h1 className='mainTitle'>Registeration Form</h1>
+        <h1 className='mainTitle'>Sing Up</h1>
         {
                       errorList.map((ele,index)=>{
                         return(
@@ -153,8 +150,11 @@ export default function Rigster() {
             <label htmlFor="exampleFormControlInput1" className="form-label">Password</label>
             <input type="password" className="form-control" id="exampleFormControlInput1" onChange={changeFormValue} name='password' />
           </div>
+          <p className="singUp">
+            already have an account , <Link className='link' to='/login'>Sign in</Link>
+          </p>
           <button type='submit' className='btn btn-primary registerBtn'>
-           <span className='d-flex'>register</span>
+           <span className='d-flex'>Register</span>
           </button>
         </form>
 

@@ -11,6 +11,7 @@ export default function Home() {
   let [trendTv, setTrendTv] = useState([]);
   let navigate=useNavigate();
   useEffect(() => {
+    document.title=`Noxe: Home`;
     getTreand(`https://api.themoviedb.org/3/trending/movie/day?api_key=085e63afd0a9d4557f1d96bbe7101ffa`, setTrendMoviesDay);
     getTreand(`https://api.themoviedb.org/3/trending/tv/day?api_key=085e63afd0a9d4557f1d96bbe7101ffa`, setTrendTv);
   }, []);
@@ -20,7 +21,6 @@ export default function Home() {
     let { data } = await axios.get(url);
     setLodingScrren(false);
     collback(data.results);
-    console.log(data.results);
   }
     //=======================made go to details================================
     let goToDetails=(id,type)=>{
@@ -67,7 +67,7 @@ export default function Home() {
             {
               trendTv.map((ele, index) => {
                 return (
-                  <div className="col-lg-2 col-md-3 col-sm-6 ele" key={index} >
+                  <div className="col-lg-2 col-md-3 col-6 ele" key={index} >
                     <div className="moviesInfo">
                       <div className="overlay">
                         <button className='btn' onClick={()=>goToDetails(ele.id,'tv')}>Go to details</button>

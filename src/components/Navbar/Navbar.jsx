@@ -7,7 +7,6 @@ import './navbarMq.css'
 export default function Navbar({ userData, logout }) {
   useEffect(() => {
     changeNavTogglertColor();
-    console.log(userData);
   });
   let changeNavTogglertColor = () => {
     let navbarToggler = document.querySelector('.navbar-toggler');

@@ -8,14 +8,15 @@ export default function TvShows() {
   let [data, setdata] = useState([]);
   let [tvShows, setTvShows] = useState([]);
   let [mainTitle, setMainTilte] = useState('Tv Shows');
+  let [prefixImage] = useState('https://image.tmdb.org/t/p/w500/');
   let getTreand = async (url, collback) => {
     setLodingScrren(true);
     let { data } = await axios.get(url);
     setLodingScrren(false);
     collback(data.results);
-    console.log(data.results);
   }
   useEffect(() => {
+    document.title=`Noxe: Tv Shows`;
     getTreand(`https://api.themoviedb.org/3/discover/tv?api_key=085e63afd0a9d4557f1d96bbe7101ffa`, setTvShows);
   }, []);
   useEffect(() => {
@@ -27,19 +28,17 @@ export default function TvShows() {
       let info = {
         id: ele.id,
         title: ele.original_name,
-        image: ele.poster_path,
+        image: ele.poster_path!=null ? prefixImage+ele.poster_path:'/default-image.jpg',
         rating: ele.vote_average.toFixed(1),
       }
       return info;
     });
-    console.log(dataToSent);
     setdata(dataToSent);
   }
   // ==================================end make array of data to send to data Show===========================================
   //===================================search==========================================
   let search = () => {
     let searchInput = document.querySelector('.searchInput');
-    console.log(searchInput.value);
     let name = searchInput.value;
     getTreand(`https://api.themoviedb.org/3/search/tv?query=${name}&api_key=085e63afd0a9d4557f1d96bbe7101ffa`, setTvShows);
   };

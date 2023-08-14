@@ -24,5 +24,8 @@
     .header{
       background-position: -20rem 0rem;
     }
+    .header .mainTitle{
+      font-size: 4rem;
+    }
   }
   /* ---------------------------------end made header style------------------------------------------ */

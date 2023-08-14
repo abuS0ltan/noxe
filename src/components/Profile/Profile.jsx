@@ -5,17 +5,14 @@ import EditProfile from './ProfileComponents/EditProfile';
 export default function Profile({userData,setLoginData}) {
     let [profileData,setProfileData]=useState({});
     useEffect(()=>{
+      document.title=`Noxe: Profile`;
         const data=userData;
-        console.log(data)
         if(data==undefined){
-          console.log('dontwork')
           setLoginData();
-          console.log(userData)
           setProfileData(userData);
 
         }
         else{
-          console.log('work')
           setProfileData(data);
         }
     },[])

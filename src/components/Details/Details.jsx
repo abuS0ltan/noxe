@@ -23,7 +23,6 @@ export default function Details() {
   let getData = async () => {
     let { data } = await axios.get(`https://api.themoviedb.org/3/${type}/${id}?api_key=085e63afd0a9d4557f1d96bbe7101ffa`)
     setLodingScrren(false);
-    console.log(data)
     makeData(data);
   }
   //=====================get data for the ele from api==============================
@@ -79,20 +78,14 @@ export default function Details() {
     if(localStorage.getItem("loginData")){
       currentUser=JSON.parse(localStorage.getItem("loginData"));
       users=JSON.parse(localStorage.getItem("users"));
-      console.log('save');
-      console.log(currentUser);
       let item={
         id:id,
         type:type
       }
-      console.log(item);
       currentUser.list.push(item);
-      console.log(currentUser);
-      console.log(users);
       let sameEmail;
       let index = 0;
       for ( ;index < users.length; index++) {
-        console.log(users)
         if(currentUser.email==users[index].email){
           sameEmail= index;
         }
@@ -111,22 +104,17 @@ export default function Details() {
     currentUser=JSON.parse(localStorage.getItem("loginData"));
     users=JSON.parse(localStorage.getItem("users"));
     let list=[...currentUser.list];
-      console.log(list);
       let item;
       list.forEach((ele,index)=>{
         if(ele.id==id&&ele.type==type){
           item=index;
         }
       })
-      console.log(item);
       list.splice(item,1);
-      console.log(list);
       currentUser.list=[...list];
-      console.log(currentUser);
       let sameEmail;
       let index = 0;
       for ( ;index < users.length; index++) {
-        console.log(users)
         if(currentUser.email==users[index].email){
           sameEmail= index;
         }
@@ -137,12 +125,12 @@ export default function Details() {
       setIsSave(false);
   }
   useEffect(() => {
+    document.title=`Noxe: Details`;
     getData();
     if(localStorage.getItem("loginData")){
       currentUser=JSON.parse(localStorage.getItem("loginData"));
       users=JSON.parse(localStorage.getItem("users"));
       let list=[...currentUser.list];
-      console.log(list);
       let itemExist=false;
       list.forEach((ele)=>{
         if(ele.id==id&&ele.type==type){
@@ -181,7 +169,6 @@ export default function Details() {
               </h2>
               {
                 eleData.genres.map((ele,index) => {
-                  console.log(index);
                   return (type == 'person' ?
                     <>
                       <span className='genre' key={index}>{ele}</span>

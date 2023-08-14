@@ -16,18 +16,15 @@ export default function EditProfile({userData,setLoginData}) {
   }
   );
   useEffect(()=>{
-    console.log(userData);
     document.getElementById('first_name').value=userData.first_name;
     document.getElementById('last_name').value=userData.last_name;
     document.getElementById('age').value=userData.age;
     setData(userData);
     users=JSON.parse(localStorage.getItem("users"));
-    console.log(users)
     newusers=[...users];
   },[]);
   //==============================submit===================================================
   const submitData=(e)=>{
-    console.log(e);
     e.preventDefault()
     validate();
   }
@@ -35,19 +32,15 @@ export default function EditProfile({userData,setLoginData}) {
   const changeFormValue=(e)=>{
     const newData={...data};
     newData[e.target.id]=e.target.value;
-    console.log(newData);
     setData(newData);
   }
   //=============================validate===========================================================
   const validate=()=>{
-    console.log(users)
     let validateResult=validateForm();
-    console.log(validateResult);
     if(validateResult.error!=undefined)
     {
       // let registerBtn =document.querySelector('.registerBtn ');
       setErrorList(validateResult.error.details);
-      console.log(validateResult.error.details);
       //the correct code is this but i make it comment b i need to test the loading in rigster btn
       // setLoading(false);
       // registerBtn.classList.remove('disabled');
@@ -58,11 +51,9 @@ export default function EditProfile({userData,setLoginData}) {
       //  }, 2000);
     }
     else{
-      console.log(users)
       let sameEmail;
       let index = 0;
       for ( ;index < users.length; index++) {
-        console.log(users)
         if(data.email==users[index].email){
           sameEmail= index;
         }
@@ -78,18 +69,12 @@ export default function EditProfile({userData,setLoginData}) {
       //   // registerBtn.classList.remove('disabled');
       //   // registerBtn.innerHTML=`<span className='d-flex'>register</span>`;
       // }
-      console.log(users)
-        console.log(sameEmail)
-        console.log(data);
-        console.log(users)
         // users[sameEmail]=data;
-        console.log(users)
         localStorage.setItem("users",JSON.stringify(users));
-        console.log(JSON.parse(localStorage.getItem("users")))
         localStorage.setItem("loginData",JSON.stringify(data));
         setLoginData();
-        window.location.reload(false);
         navigate('/profile');
+        window.location.reload(false);
     }
   }
   //============================validate form==============================================

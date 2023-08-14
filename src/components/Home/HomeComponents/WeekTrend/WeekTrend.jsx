@@ -16,7 +16,6 @@ export default function WeekTrend() {
     let getTreand = async (url, collback) => {
         let { data } = await axios.get(url);
         collback(data.results);
-        console.log(data.results);
     }
     let [trendMoviesWeek, setTrendMoviesWeek] = useState([]);
     useEffect(() => {
@@ -40,7 +39,7 @@ export default function WeekTrend() {
                     {
                         trendMoviesWeek.map((ele, index) => {
                             return (
-                                <div className="col-lg-2 col-md-3 col-sm-6 ele" key={index}>
+                                <div className="col-lg-2 col-md-3 col-6 ele" key={index}>
                                     <div className="moviesInfo">
                                         <div className="overlay">
                                             <button className='btn' onClick={() => goToDetails(ele.id, 'movie')}>Go to details</button>

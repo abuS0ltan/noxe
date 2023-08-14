@@ -17,23 +17,18 @@ export default function ChangePass({userData,setLoginData,logout}) {
   }
   );
   useEffect(()=>{
-    console.log(userData);
     setData(userData);
     users=JSON.parse(localStorage.getItem("users"));
-    console.log(users)
     newusers=[...users];
   },[]);
   //==============================submit===================================================
   const submitData=(e)=>{
-    console.log(e);
     e.preventDefault()
     validate();
   }
     //=============================validate===========================================================
     const validate=()=>{
-      console.log(users)
       let validateResult=validateForm();
-      console.log(validateResult);
       if(validateResult!=undefined)
       {
         // let registerBtn =document.querySelector('.registerBtn ');
@@ -48,13 +43,11 @@ export default function ChangePass({userData,setLoginData,logout}) {
         //  }, 2000);
       }
       else{
-        console.log(users)
         let newp=document.getElementById('newp').value;
         data.password=newp;
         let sameEmail;
         let index = 0;
         for ( ;index < users.length; index++) {
-          console.log(users)
           if(data.email==users[index].email){
             sameEmail= index;
           }
@@ -70,14 +63,8 @@ export default function ChangePass({userData,setLoginData,logout}) {
         //   // registerBtn.classList.remove('disabled');
         //   // registerBtn.innerHTML=`<span className='d-flex'>register</span>`;
         // }
-        console.log(users)
-          console.log(sameEmail)
-          console.log(data);
-          console.log(users)
           // users[sameEmail]=data;
-          console.log(users)
           localStorage.setItem("users",JSON.stringify(users));
-          console.log(JSON.parse(localStorage.getItem("users")))
           localStorage.setItem("loginData",JSON.stringify(data));
           setLoginData();
           window.location.reload(false);

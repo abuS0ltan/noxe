@@ -12,10 +12,11 @@ export default function YourList() {
   let [tvData,setTvData]=useState([]);
   let [peopleData,setPeopleData]=useState([]);
   let [mainTitle,setMainTilte]=useState('Your List');
+  let [prefixImage] = useState('https://image.tmdb.org/t/p/w500/');
   useEffect(()=>{
+    document.title=`Noxe: Your List`;
     let currentUser=JSON.parse(localStorage.getItem("loginData"));
     list=[...currentUser.list];
-    console.log(list);
     list.forEach((ele)=>{
       if(ele.type=='movie'){
         moviesList.push(ele);
@@ -27,7 +28,6 @@ export default function YourList() {
         peopleList.push(ele);
       }
     })
-    console.log(moviesList);
     //==========================make moveis data ============================================
     let moviesCount=0;
     let moviesItems=[];
@@ -36,16 +36,13 @@ export default function YourList() {
       let item={
         id: data.id,
         title: data.title,
-        image: data.poster_path,
+        image: data.poster_path!=null ? prefixImage+data.poster_path:'/default-image.jpg',
         rating: data.vote_average.toFixed(1),
       }
       moviesItems.push(item);
-      console.log(moviesData);
       moviesCount++;
       if(moviesCount==moviesList.length){
         setMoviesData(moviesItems);
-        console.log(moviesCount);
-        console.log(moviesItems);
         moviesItems=[];
       }
     })
@@ -57,7 +54,7 @@ export default function YourList() {
       let item={
         id: data.id,
         title: data.original_name,
-        image: data.poster_path,
+        image: data.poster_path!=null ? prefixImage+data.poster_path:'/default-image.jpg',
         rating: data.vote_average.toFixed(1),
       }
       tvItems.push(item);
@@ -66,7 +63,6 @@ export default function YourList() {
         setTvData(tvItems);
         tvItems=[];
       }
-      console.log(tvData);
     })
     //==========================make people data ============================================
     let peopleCount=0;
@@ -76,7 +72,7 @@ export default function YourList() {
       let item={
             id:data.id,
             title:data.name,
-            image:data.profile_path,
+            image:data.profile_path!=null ?prefixImage+data.profile_path:'/peopleDefultImg.jpg',
             rating:data.popularity.toFixed(1),
       }
       peopleItems.push(item);
@@ -85,17 +81,16 @@ export default function YourList() {
         setPeopleData(peopleItems);
         peopleItems=[];
       }
-      console.log(peopleData);
     })
   },[])
   return (
     <div className='yourList'>
       <Head mainTitle={mainTitle}/>
-      <h2 className='title'>Movies</h2>
+      <h2 className='title '>Movies</h2>
       <DataShow data ={moviesData} type={'movie'}/>
-      <h2 className='title'>Tv Shows</h2>
+      <h2  className='title Border'>Tv Shows</h2>
       <DataShow data ={tvData} type={'tv'}/>
-      <h2 className='title'>People</h2>
+      <h2 className='title Border'>People</h2>
       <DataShow data ={peopleData} type={'person'}/>
     </div>
   )

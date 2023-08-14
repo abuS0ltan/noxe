@@ -1,3 +1,4 @@
+
 .rigster .form{
     color: white;
 }
@@ -18,4 +19,15 @@
 }
 .rigster .spin{
     color: red;
+}
+.rigster .link{
+    color: var(--td2Color);
+    font-weight: 900;
+}
+.rigster .registerBtn{
+    background-color: var(--td2Color);
+    border-color: var(--td2Color);
+}
+.rigster .registerBtn:active{
+    background-color: var(--td2Color);
 }
