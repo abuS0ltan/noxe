@@ -21,9 +21,9 @@ export default function Navbar({ userData, logout }) {
     if(apper==false){
       apper=true;
       drowpDown.style.display='block';
-      window.removeEventListener('click',()=>{
-        console.log('remove')
-      })
+      // window.removeEventListener('click',()=>{
+      //   console.log('remove')
+      // })
     }
     else{
       apper=false;
@@ -32,7 +32,8 @@ export default function Navbar({ userData, logout }) {
   }
   window.addEventListener('click',(e)=>{
     let drowpDownBtn=document.querySelector('.name');
-    if(e.target!=drowpDownBtn){
+    let profileIcon=document.querySelector('.profileIcon');
+    if(e.target!=drowpDownBtn&&e.target!=profileIcon){
       if(userData!=undefined)
       if(apper==true){
         apper =false;
@@ -43,6 +44,13 @@ export default function Navbar({ userData, logout }) {
     }
     
   })
+  //=====================logout=============================
+  const navigate=useNavigate();
+  const logoutAndNavigate=()=>{
+
+    logout();
+    navigate('/login');
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg ">
@@ -54,7 +62,7 @@ export default function Navbar({ userData, logout }) {
               userData != undefined ?
                 <>
                   <li className="nav-item d-flex">
-                    <span onClick={()=>drowpDownApper()} className='nav-link px-xl-4 px-md-3 px-2 name'> {userData.first_name}<FontAwesomeIcon className='icon' icon="fa-regular fa-user" /></span>
+                    <span onClick={()=>drowpDownApper()} className='nav-link px-xl-4 px-md-3 px-2 name'> {userData.first_name}<FontAwesomeIcon className='icon profileIcon' icon="fa-regular fa-user" /></span>
                     <ul className="drowpDown">
                       <li className="nav-item">
                         <Link className='nav-link' to='/profile'>Profile</Link>
@@ -63,7 +71,7 @@ export default function Navbar({ userData, logout }) {
                         <Link className='nav-link' to='/yourlist'>YourList</Link>
                       </li>
                       <li className="nav-item lastItem">
-                        <Link onClick={logout} className='nav-link'>Logout</Link>
+                        <Link onClick={()=>logoutAndNavigate()} className='nav-link' to='/login'>Logout</Link>
                       </li>
                     </ul>
                   </li>

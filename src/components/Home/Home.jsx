@@ -70,7 +70,7 @@ export default function Home() {
                   <div className="col-lg-2 col-md-3 col-6 ele" key={index} >
                     <div className="moviesInfo">
                       <div className="overlay">
-                        <button className='btn' onClick={()=>goToDetails(ele.id,'tv')}>Go to details</button>
+                        <button className='btn' onClick={()=>goToDetails(ele.id,'tv')}>Watch Now</button>
                       </div>
                       <img src={prefixImage + ele.poster_path} alt="" className='movieImage' />
                       <div className="titleDiv">

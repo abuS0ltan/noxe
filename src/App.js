@@ -28,7 +28,7 @@ function App() {
       age: '20',
       email: 'admin@gmail.com',
       password: 'admin',
-      list:[]
+      list:[],
     }]
   if(localStorage.getItem("users")==null){
     localStorage.setItem('users',JSON.stringify(users));
@@ -54,7 +54,6 @@ function App() {
   let logout=()=>{
     localStorage.removeItem('loginData');
     setUserData(undefined);
-    return(<Navigate to='/login'/>)
   }
   const mySolveForProblem=()=>{
 

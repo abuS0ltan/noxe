@@ -90,7 +90,14 @@ export default function DataShow({data,type}) {
                   
                   <div className="moviesInfo">
                     <div className="overlay">
-                      <button className='btn' onClick={()=>goToDetails(ele.id)}>Go to details</button>
+                      <button className='btn' onClick={()=>goToDetails(ele.id)}>
+                        {
+                          type=='person'?
+                          `Go to details`
+                          :
+                          `Watch Now`
+                        }
+                      </button>
                     </div>
                     <img src={ele.image} alt={ele.title} className='movieImage' />
                     <div className="titleDiv">
