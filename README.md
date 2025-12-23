@@ -1,3 +1,6 @@
+# Noxe
+Designed and developed a responsive and interactive frontend using React, implementing dynamic components, state management, and API integration to browse trending movies and display detailed information. Focused on UI/UX best practices to deliver a smooth and engaging user experience across devices.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
